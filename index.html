@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Hello World!</title>
-<link rel="stylesheet" href="bluestyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本过滤显示网页</title>
 </head>
 <body>
+    <h1>多行文本过滤显示</h1>
 
-<h1>Hello木s1111111 world!</h1>
-<div><img src="img_hello_world.jpg" alt="Hello World from Space" style="width:100%;max-width:640px"></div>
-<p>This is the first file in my new Git Repo.</p>
-<p>This line is here to show how merging works.</p>
-<div><img src="img_hello_git.jpg" alt="Hello Git" style="width:100%;max-width:640px"></div>
+    <!-- 多行文本框 -->
+    <textarea id="inputText" rows="10" cols="50" placeholder="在此粘贴文本..."></textarea>
+    <br><br>
 
+    <!-- 提交按钮 -->
+    <button onclick="displayText()">提交</button>
+    <br><br>
+
+    <!-- 显示文本的区域 -->
+    <div id="outputText" style="white-space: pre-wrap;"></div>
+
+    <script>
+        function displayText() {
+            // 获取文本框的内容
+            var text = document.getElementById("inputText").value;
+            
+            // 过滤掉井号(#)和星号(*)
+            var filteredText = text.replace(/[#*]/g, '');
+            
+            // 将过滤后的内容显示在网页中
+            document.getElementById("outputText").innerText = filteredText;
+        }
+    </script>
 </body>
 </html>
