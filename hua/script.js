@@ -1,20 +1,23 @@
 let currentPage = 1;
 const imagesPerPage = 4;
-let images = [];
+
+// 初始化从Local Storage加载图片
+let images = JSON.parse(localStorage.getItem('uploadedImages')) || [];
 
 document.getElementById('uploadButton').addEventListener('click', () => {
     const input = document.getElementById('uploadInput');
     const files = input.files;
-    
+
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
-        
+
         reader.onload = function(e) {
             images.push(e.target.result);
+            localStorage.setItem('uploadedImages', JSON.stringify(images)); // 保存到Local Storage
             displayImages();
         }
-        
+
         reader.readAsDataURL(file);
     }
 });
@@ -54,3 +57,6 @@ document.getElementById('nextPage').addEventListener('click', () => {
         displayImages();
     }
 });
+
+// 初始加载时显示图片
+displayImages();
