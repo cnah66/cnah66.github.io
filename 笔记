@@ -1,0 +1,103 @@
+git status
+On branch master
+
+No commits yet
+
+Files in your Git repository folder can be in one of 2 states:
+
+Tracked - files that Git knows about and are added to the repository
+Untracked - files that are in your working directory, but not added to the repository
+
+When you first add files to an empty repository, they are all untracked. To get Git to track them, you need to stage them, or add them to the staging environment.
+
+Now add all files in the current directory to the Staging Environment:
+git add --all
+The shorthand command for git add --all is git add -A
+
+git commit -m "First release of Hello World!"
+
+git status --short
+ M index.html
+Note: Short status flags are:
+?? - Untracked files
+A - Files added to stage
+M - Modified files
+D - Deleted files
+
+git log
+
+git branch hello-world-images
+
+git branch
+
+git checkout hello-world-images
+Switched to branch 'hello-world-images'
+
+Note: Using the -b option on checkout will create a new branch, and move to it, if it does not exist
+
+git checkout -b emergency-fix
+Switched to a new branch 'emergency-fix'
+
+git branch -d emergency-fix
+Deleted branch emergency-fix (was dfa79db).
+
+git remote add origin https://github.com/w3schools-test/hello-world.git
+git push --set-upstream origin master
+
+git merge origin/master
+
+git pull origin
+
+git commit -a -m "Updated index.html. Resized image"
+
+git push origin
+
+git pull
+
+git branch -a
+
+git push origin update-readme
+
+-----
+
+在本地通过 Git Bash 将新创建的分支同步到 `master` 分支并推送到 GitHub，步骤如下：
+
+### 1. **创建新分支并切换到该分支**
+   - 你可以在本地创建一个新分支并切换到该分支：
+     git checkout -b your_new_branch
+
+### 2. **在新分支上进行更改**
+   - 在新分支上进行你需要的更改，然后提交更改：
+     git add .
+     git commit -m "Your commit message"
+
+### 3. **将新分支推送到 GitHub**
+     git push origin your_new_branch
+
+### 4. **切换回 master 分支**
+     git checkout master
+
+### 5. **将新分支的更改合并到 master**
+     git merge your_new_branch
+   - 如果存在冲突，需要手动解决冲突，然后再进行提交。
+
+### 6. **将合并后的 master 分支推送到 GitHub**
+   - 将合并后的 `master` 分支推送到 GitHub：
+     git push origin master
+
+### 7. **删除本地和远程分支（可选）**
+   - 如果不再需要新分支，可以删除本地分支：
+     git branch -d your_new_branch
+
+   - 删除远程分支：
+     git push origin --delete your_new_branch
+
+### 步骤总结：
+
+1. 创建并切换到新分支，进行更改并提交。
+2. 推送新分支到 GitHub。
+3. 切换回 `master` 分支，将新分支的更改合并到 `master`。
+4. 推送合并后的 `master` 分支到 GitHub。
+5. （可选）删除本地和远程的新分支。
+
+按照这些步骤，你就可以将本地创建的新分支的更改同步到 `master` 分支，并同步到 GitHub。
