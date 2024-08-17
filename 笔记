@@ -1,3 +1,15 @@
+Git Bash：
+
+1、 git --version
+git version 2.46.0.windows.1
+
+git config --global user.name "w3schools-test"
+git config --global user.email "test@w3schools.com"
+
+mkdir myproject
+cd myproject
+git init (You just created your first Git Repository!)
+
 git status
 On branch master
 
