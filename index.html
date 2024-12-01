@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文本过滤显示网页</title>
+    <title>听知识 - 抖音号：tingzhishi</title>
 </head>
 <body>
+<<<<<<< HEAD
     <h1>听知识 —— 抖音号：tingzhishi</h1>
+=======
+    <h1>听知识 - 抖音号：tingzhishi</h1>
+>>>>>>> c8839767c940998656c8cebe6665168024200b0c
 
     <!-- 多行文本框 -->
     <textarea id="inputText" rows="10" cols="50" placeholder="在此粘贴文本..."></textarea>
@@ -26,6 +30,9 @@
             
             // 过滤掉井号(#)和星号(*)
             var filteredText = text.replace(/[#*]/g, '');
+
+            // 过滤掉上标（<sup>标签）
+            filteredText = filteredText.replace(/<sup>.*?<\/sup>/g, '');
             
             // 将过滤后的内容显示在网页中
             document.getElementById("outputText").innerText = filteredText;
