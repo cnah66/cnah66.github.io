@@ -29,6 +29,10 @@
 
             // 过滤掉上标（<sup>标签）
             filteredText = filteredText.replace(/<sup>.*?<\/sup>/g, '');
+
+            // 过滤掉纯文本中的所有上标字符（包括2、3、0等上标）
+            // 这些是常见的上标字符范围，可以根据需要添加更多字符
+            filteredText = filteredText.replace(/[²³⁰¹²³⁴⁵⁶⁷⁸⁹]/g, '');
             
             // 将过滤后的内容显示在网页中
             document.getElementById("outputText").innerText = filteredText;
