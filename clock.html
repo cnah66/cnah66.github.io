@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kindle 时钟</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: white;
+      color: black;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.2em;
+    }
+    .time {
+      font-size: 2em;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="date"></div>
+  <div class="time" id="time"></div>
+  <div id="extra"></div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      // 日期
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const date = now.getDate();
+      const weekday = ['日','一','二','三','四','五','六'][now.getDay()];
+      document.getElementById("date").textContent = `${year}年${month}月${date}日 周${weekday}`;
+
+      // 时间
+      let hour = now.getHours();
+      const minute = now.getMinutes().toString().padStart(2, '0');
+      const second = now.getSeconds().toString().padStart(2, '0');
+      const ampm = hour < 12 ? '上午' : '下午';
+      hour = hour % 12 || 12;
+      document.getElementById("time").textContent = `${ampm} ${hour}:${minute}:${second}`;
+
+      // 第几周、本月剩余、今年剩余
+      const firstDay = new Date(now.getFullYear(), 0, 1);
+      const weekNumber = Math.ceil((((now - firstDay) / 86400000) + firstDay.getDay() + 1) / 7);
+
+      const endOfMonth = new Date(year, month, 0);
+      const daysLeftMonth = endOfMonth.getDate() - date;
+
+      const endOfYear = new Date(year + 1, 0, 1);
+      const daysLeftYear = Math.floor((endOfYear - now) / (1000 * 60 * 60 * 24));
+
+      document.getElementById("extra").innerHTML =
+        `第 ${weekNumber} 周<br>本月剩余 ${daysLeftMonth} 天<br>今年剩余 ${daysLeftYear} 天`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
