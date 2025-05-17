@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Kindle 时钟</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        #time {
+            font-size: 6em;
+            margin: 0.5em 0;
+        }
+
+        #date {
+            font-size: 4em;
+            margin: 0.3em 0;
+        }
+
+        #extra {
+            font-size: 2em;
+            margin: 0.5em 0;
+        }
+    </style>
+</head>
+<body>
+    <p id="time">下午 10:25:09</p>
+    <p id="date">10月16日 星期六</p>
+    <p id="extra">第 X 周，本月剩余 X 天，今年剩余 X 天</p>
+
+    <script>
+        function refresh() {
+            var timeZone = 8;
+            var d = new Date();
+            d.setMinutes(d.getMinutes() + d.getTimezoneOffset() + (timeZone * 60));
+
+            // 时间
+            var amOrPm = ["上午", "下午"];
+            var hour = d.getHours() - Math.floor(d.getHours() / 13) * 12;
+            document.getElementById("time").innerHTML =
+                amOrPm[Math.floor(d.getHours() / 12)] + " " +
+                ("0" + hour).slice(-2) + ":" +
+                ("0" + d.getMinutes()).slice(-2) + ":" +
+                ("0" + d.getSeconds()).slice(-2);
+
+            // 日期
+            var whichDay = ["日", "一", "二", "三", "四", "五", "六"];
+            document.getElementById("date").innerHTML =
+                (d.getMonth() + 1) + "月" + d.getDate() + "日 周" + whichDay[d.getDay()];
+
+            // 额外信息
+            var startOfYear = new Date(d.getFullYear(), 0, 1);
+            var daysPassed = Math.floor((d - startOfYear) / (24 * 60 * 60 * 1000));
+            var weekNumber = Math.ceil((daysPassed + startOfYear.getDay() + 1) / 7);
+
+            var endOfMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+            var daysLeftMonth = endOfMonth.getDate() - d.getDate();
+
+            var endOfYear = new Date(d.getFullYear() + 1, 0, 1);
+            var daysLeftYear = Math.floor((endOfYear - d) / (1000 * 60 * 60 * 24));
+
+            document.getElementById("extra").innerHTML =
+                `第 ${weekNumber} 周，本月剩余 ${daysLeftMonth} 天，今年剩余 ${daysLeftYear} 天`;
+        }
+
+        refresh();
+        setInterval("refresh()", 1000);
+    </script>
+</body>
+</html>
